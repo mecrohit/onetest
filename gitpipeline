@@ -21,9 +21,9 @@ jobs:
           [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
           nvm install 18.19
 
-      - name: Check for modifications in microservice
+      - name: Check for modifications and deploy
         run: |
-          for service in config-service; do
+          for service in config-service microservice1 microservice2; do
             if git diff --name-only HEAD^ | grep -q "^${service}/"; then
               echo "Changes detected in $service"
               cd "$service" || exit 1
